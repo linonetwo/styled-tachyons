@@ -1,6 +1,6 @@
 # styled-tachyons
 
-Mix tachyons into styled-components.
+Mix tachyons into styled-components. [Try it out in stackblitz.](https://stackblitz.com/edit/react-hfstqe?file=index.js)
 
 ## Usages
 
