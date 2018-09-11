@@ -21,7 +21,7 @@
     ]
   },
   "name": "styled-tachyons",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Mix tachyons into styled-components.",
   "directories": {
     "test": "test"
