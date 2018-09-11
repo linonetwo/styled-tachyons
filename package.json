@@ -4,8 +4,7 @@
     "build": "babel src --out-dir js",
     "prepare": "npm run build && webpack --optimize-minimize",
     "watch": "babel --watch src --out-dir js",
-    "coverage": "nyc report --reporter=text-lcov",
-    "prepublish": "npm run prepare"
+    "coverage": "nyc report --reporter=text-lcov"
   },
   "main": "js/index.js",
   "license": "MIT",
@@ -21,7 +20,7 @@
     ]
   },
   "name": "styled-tachyons",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Mix tachyons into styled-components.",
   "directories": {
     "test": "test"
