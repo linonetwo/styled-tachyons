@@ -1,5 +1,5 @@
 import tachyons from 'tachyons-js';
-import { compact, flatten, words, isNumber, isNaN } from 'lodash';
+import { compact, flatten, flattenDeep, words, isNumber, isNaN, isArray } from 'lodash';
 import { _ } from 'param.macro';
 
 function lexer(stringWithSpace) {
@@ -42,7 +42,14 @@ export default function ty(tachyonsClassNameStrings, ...args) {
 				/** get tachyons css string from what's inside ${xxx} */
 				const cssFromVariable = do {
 					if (typeof args[index] === 'function') {
-						mapTachyonsFragmentToCSSInJS(args[index](props));
+						const functionResult = args[index](props);
+						if (isArray(functionResult)) {
+							// styled-is
+							flatten(functionResult.map(mapTachyonsFragmentToCSSInJS))
+						} else if (typeof functionResult === 'string') {
+							// ${({ blue }) => blue && 'bgBlue'}
+							mapTachyonsFragmentToCSSInJS(functionResult);
+						}
 					} else if (typeof args[index] === 'string') {
 						mapTachyonsFragmentToCSSInJS(args[index]);
 					} else {
