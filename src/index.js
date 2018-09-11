@@ -41,7 +41,9 @@ export default function ty(tachyonsClassNameStrings, ...args) {
 				const cssFromString = mapTachyonsFragmentToCSSInJS(fragment);
 				/** get tachyons css string from what's inside ${xxx} */
 				const cssFromVariable = do {
-					if (typeof args[index] === 'function') {
+					if (typeof args[index] === 'string') {
+						mapTachyonsFragmentToCSSInJS(args[index]);
+					} else if (typeof args[index] === 'function') {
 						const functionResult = args[index](props);
 						if (isArray(functionResult)) {
 							// styled-is
@@ -50,12 +52,8 @@ export default function ty(tachyonsClassNameStrings, ...args) {
 							// ${({ blue }) => blue && 'bgBlue'}
 							mapTachyonsFragmentToCSSInJS(functionResult);
 						}
-					} else if (typeof args[index] === 'string') {
-						mapTachyonsFragmentToCSSInJS(args[index]);
-					} else {
-						[];
 					}
-				};
+				} || [];
 				return [...cssFromString, ...cssFromVariable];
 			})
 		);
