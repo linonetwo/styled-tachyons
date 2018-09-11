@@ -21,6 +21,19 @@ const Article = styled.article`
 
 You can use kebab-cased `bg-black` or snake_cased `ph3_m`.
 
+### don't forget to inject the variables
+
+```js
+import { injectGlobal } from 'styled-components';
+import { tachyonsVariables }  from 'styled-tachyons';
+
+injectGlobal`
+  ${tachyonsVariables};
+`;
+```
+
+### with other styled-components libs
+
 Put function that returns a tachyons class names:
 
 ```js
