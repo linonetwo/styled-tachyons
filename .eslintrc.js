@@ -1,4 +1,5 @@
 module.exports = {
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "es6": true,
@@ -6,7 +7,8 @@ module.exports = {
         "mocha": true
     },
     "plugins":[
-        "mocha"
+        "mocha",
+        "babel"
     ],
     "extends": "eslint:recommended",
     "parserOptions": {
