@@ -4,7 +4,8 @@
     "build": "babel src --out-dir js",
     "prepare": "npm run build && webpack --optimize-minimize",
     "watch": "babel --watch src --out-dir js",
-    "coverage": "nyc report --reporter=text-lcov"
+    "coverage": "nyc report --reporter=text-lcov",
+    "prepublish": "npm run prepare"
   },
   "main": "js/index.js",
   "license": "MIT",
