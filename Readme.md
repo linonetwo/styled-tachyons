@@ -19,7 +19,7 @@ const Article = styled.article`
 `;
 ```
 
-You can use kebab-cased `bg-black` or snake_cased `ph3_m`.
+You can use kebab-cased `bg-black` or snake_cased `ph3_m` or camelCase `bgBlue`.
 
 ### don't forget to inject the variables
 
