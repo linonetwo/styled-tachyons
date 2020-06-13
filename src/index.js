@@ -1,27 +1,14 @@
 import tachyons from 'tachyons-js';
-import { compact, flatten, flattenDeep, words, isNumber, isNaN, isArray } from 'lodash';
+import { compact, flatten, words, isNumber, isNaN, isArray } from 'lodash';
 import { _ } from 'param.macro';
 
 function lexer(stringWithSpace) {
 	return compact(stringWithSpace.split(/\s/));
 }
 
-const getTachyons = tachyons[_];
-const snakeCase = words(_).reduce(
-	(result, word, index) =>
-		result +
-		do {
-			const followUpIsNumber = isNumber(Number(word)) && !isNaN(Number(word));
-			if (followUpIsNumber || !(index > 0)) {
-				('');
-			} else {
-				('_');
-			}
-		} +
-		word.toLowerCase(),
-	''
-);
-function getTachyonsCSS(shorthand) {
+export const getTachyons = tachyons[_];
+export const snakeCase = word => word.split('-').map(aWord => aWord.toLowerCase()).join('_');
+export function getTachyonsCSS(shorthand) {
 	return shorthand |> snakeCase |> getTachyons;
 }
 
@@ -42,7 +29,7 @@ export default function ty(tachyonsClassNameStrings, ...args) {
 				/** get tachyons css string from what's inside ${xxx} */
 				const cssFromVariable = do {
 					if (typeof args[index] === 'string') {
-						mapTachyonsFragmentToCSSInJS(args[index]);
+						mapTachyonsFragmentToCSSInJS(args[index])
 					} else if (typeof args[index] === 'function') {
 						const functionResult = args[index](props);
 						if (isArray(functionResult)) {
@@ -50,7 +37,7 @@ export default function ty(tachyonsClassNameStrings, ...args) {
 							flatten(functionResult.map(mapTachyonsFragmentToCSSInJS))
 						} else if (typeof functionResult === 'string') {
 							// ${({ blue }) => blue && 'bgBlue'}
-							mapTachyonsFragmentToCSSInJS(functionResult);
+							mapTachyonsFragmentToCSSInJS(functionResult)
 						}
 					}
 				} || [];
